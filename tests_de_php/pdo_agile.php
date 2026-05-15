@@ -103,6 +103,9 @@ function LireDonneesPDOPreparee($cur,&$tab) // requêtes select  préparées
 //---------------------------------------------------------------------------------------------
 // fonctions supplementaires
 //---------------------------------------------------------------------------------------------
+
+/*
+
 function fabriquerChaineConnexPDO()
 {
 	//$hote = '10.103.0.20';
@@ -128,3 +131,4 @@ function fabriquerChaineConnexPDO()
 }
 
  ?>
+ */
