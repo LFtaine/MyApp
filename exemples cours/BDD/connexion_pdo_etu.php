@@ -6,9 +6,7 @@
 	include_once "pdo_agile.php";
 	echo '<meta charset="utf-8"> ';
 	// décommenter en fonction du serveur de BDD utilisé
-	//define ("MOD_BDD","MYSQL");
-	define ("MOD_BDD","ORACLE");
-
+	
 	
 	$db_username = "root";
 	$db_password = ""; //
