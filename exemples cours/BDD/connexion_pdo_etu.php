@@ -4,25 +4,16 @@
 	// connexion_oracle_etu.php 29/05/2021
 	
 	include_once "pdo_agile.php";
-	include_once "param_connexion_etu.php";
 	echo '<meta charset="utf-8"> ';
 	// décommenter en fonction du serveur de BDD utilisé
 	//define ("MOD_BDD","MYSQL");
 	define ("MOD_BDD","ORACLE");
 
-	if (MOD_BDD == "MYSQL")
-	{
-		$db_username = $db_usernameMySQL;		
-		$db_password = $db_passwordMySQL;
-		$db = $dbMySQL;
-	}
-	else
-	{
-		$db_username = $db_usernameOracle;		
-		$db_password = $db_passwordOracle;	
-		$db = $dbOracle;
-	}
 	
+	$db_username = "root";
+	$db_password = ""; //
+	$db = "mysql:host=localhost;dbname=liste;charset=UTF8";
+		
 	$conn = OuvrirConnexionPDO(); // à compléter
 
 	if ($conn)
