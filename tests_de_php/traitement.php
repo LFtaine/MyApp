@@ -1,11 +1,7 @@
 <?php
-	// XXX : Saison 5 , Épisode 3 
-	// préparation SAE 2.456 : programme principal
-	// connexion_oracle_etu.php 29/05/2021
-	
+
 	include_once "pdo_agile.php";
 	echo '<meta charset="utf-8"> ';
-	// décommenter en fonction du serveur de BDD utilisé
 	
 	
 	$db_username = "root";
@@ -13,15 +9,22 @@
 	$db = "mysql:host=localhost;dbname=maliste;charset=UTF8";
 	echo "test\n";
 		
-	$conn = OuvrirConnexionPDO($db,$db_username,$db_password); // à compléter
+	$conn = OuvrirConnexionPDO($db,$db_username,$db_password); 
 
 	if ($conn)
 	{
-		echo ("<hr/> Connexion réussie à la base de données <br/>");
+		echo ("<hr/> Connexion réussie à la base de données <br/><br/><br/>");
+		$index = $_POST["index"] ?? null;
+		$nom = $_POST["nom"] ?? null;
+
+		if (!empty($index)) {
+    		lireDonneesNum($conn);
+		}
+		else if (!empty($nom)) {
+			lireDonneesTexte($conn);
+		}
 		//insererDonnee($conn); //fonctionnel mais ne pas en abuser pour éviter les erreurs
 		//corrigerDonnees($conn);
-		$table = lireDonnees($conn);
-		afficherObj($table);
 	}
 	else
 		echo ("<hr/> Connexion impossible à la base de données <br/>");
@@ -43,7 +46,7 @@
 		echo "Résultats de la requête " . $res . "<br/>";
 	}
 
-	function lireDonnees($c)
+	function lireDonneesNum($c)
 	{
 		$numero=$_POST["index"];
 		$sql = "select * from serie where serie_code = $numero";
@@ -72,6 +75,43 @@
 
 		echo "la série s'appelle ".$donnee[0]["SERIE_NOM"]." c'est un ".strtolower($donnee[0]["STATUT_CODE"])." et j'ai $avancee la $media, $fin" ;
 		return $donnee;
+	}
+
+	function lireDonneesTexte($c)
+	{
+		$texte=$_POST["nom"];
+		$args="lower('%".$texte."%')";
+		$sql = "select * from serie where lower(SERIE_NOM) like $args";
+	
+		$res=LireDonneesPDO1($c,$sql,$donnee);
+
+		foreach($donnee as $indice=> $l){
+
+			if($l["STATUT_CODE"] == "MANGA"){
+				$media="lire";
+			}
+			else{
+				$media="regarder";
+			}
+
+			if($l["AVANCEE_CODE_AVANCEE"] == "ANIME_TERMINE" || $l["AVANCEE_CODE_AVANCEE"] == "LECTURE_TERMINEE" ){
+				$avancee="finis de";
+			}
+			else{
+				$avancee="commencé à";
+			}
+
+			if($l["FIN"]){
+				$fin="cette série est terminée.";
+			}
+			else{
+				$fin="cette série n'est pas terminée.";
+			}
+
+			echo "La série s'appelle ".$l["SERIE_NOM"]." c'est un ".strtolower($l["STATUT_CODE"])." et j'ai $avancee la $media, $fin <br>" ;
+		}
+		
+			return $donnee;
 	}
 	
 	function afficherObj($obj)
