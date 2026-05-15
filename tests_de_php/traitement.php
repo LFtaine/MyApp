@@ -113,9 +113,16 @@
 				$fin="cette série n'est pas terminée.";
 			}
 
-			echo $l[$code];
-			echo "<p>La série s'appelle <a href=$cible?num=$l[$code]> ".$l["SERIE_NOM"]." </a>c'est un ".strtolower($l["STATUT_CODE"])." et j'ai $avancee la $media, $fin </p>" ;
-		} 
+			$page = "details.php?num=" . $l[$code];
+
+			echo "<p>La série s'appelle 
+			<a href='$page'>".$l["SERIE_NOM"]."</a>
+			c'est un ".strtolower($l["STATUT_CODE"])."
+			et j'ai $avancee la $media, $fin</p>";
+		}			
+
+
+		
 		
 			return $donnee;
 	}

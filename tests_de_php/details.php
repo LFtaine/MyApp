@@ -15,8 +15,10 @@
             echo "bleh";
             
                // $sql = "select LAST_INSERT_ID from historique";
-                //LireDonneesPDO1($conn,$sql,$numero);
+                
                 $numero= $_GET['num'];
+                $sql="select * from serie where serie_code = $numero";
+                LireDonneesPDO1($conn,$sql,$donnee);
 
                 if($donnee[0]["STATUT_CODE"] == "MANGA"){
                     $media="lire";
