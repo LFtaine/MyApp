@@ -3,22 +3,19 @@
 
         <?php
             include_once "pdo_agile.php";
+            include_once "connexion.php";
             echo '<meta charset="utf-8"> ';
             
-            
-            $db_username = "root";
-            $db_password = ""; //
-            $db = "mysql:host=localhost;dbname=maliste;charset=UTF8";
-            echo "test\n";
+    
                 
-            $conn = OuvrirConnexionPDO($db,$db_username,$db_password); 
+           
             echo "bleh";
             
                // $sql = "select LAST_INSERT_ID from historique";
                 
                 $numero= $_GET['num'];
                 $sql="select * from serie where serie_code = $numero";
-                LireDonneesPDO1($conn,$sql,$donnee);
+                LireDonneesPDO1(CONN,$sql,$donnee);
 
                 if($donnee[0]["STATUT_CODE"] == "MANGA"){
                     $media="lire";
@@ -41,9 +38,9 @@
                     $fin="cette série n'est pas terminée.";
                 }
 
-                echo "<p>".$donnee[0]["SERIE_NOM"] ." est un ".strtolower($donnee[0]["STATUT_CODE"]).".<br>
+                echo "<script src='../script/script.js' defer></script><p>".$donnee[0]["SERIE_NOM"] ." est un ".strtolower($donnee[0]["STATUT_CODE"]).".<br>
                 J'ai $avancee le $media, $fin</p>" ;
-                echo "<a href='select.html'>Retour à la recherche </a>";
+                echo "<a href='../html/select.html'>Retour à la recherche </a>";
         ?>
 </body>
 </html>
