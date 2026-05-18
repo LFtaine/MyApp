@@ -16,7 +16,7 @@
     }
     else{
         if (donnee_existe(CONN,$_POST["nom"],$_POST["type"])){
-            echo "Cette série existe déjà";
+            echo "<p>Cette série existe déjà</p>";
         }
         else{
             $requete_indice="SELECT max(serie_code) as serie_code from serie";
@@ -27,9 +27,27 @@
 
             $nom=$_POST["nom"];
             $type=$_POST["type"];
-            $requete="INSERT INTO serie (serie_code,serie_nom,statut_code,AVANCEE_CODE_AVANCEE) values ($dernier,'$nom','$type','LECTURE_TERMINEE')";
+            $fini=$_POST["statut_moi"];
+
+            if($type=="ANIME" ){
+                if($fini=="fini"){
+                    $statut="ANIME_TERMINE";
+                }
+                else{
+                    $statut="ANIME_EN_COURS";
+                }
+            }
+            else{
+                if($fini=="fini"){
+                    $statut="LECTURE_TERMINEE";
+                }
+                else{
+                    $statut="LECTURE_EN_COURS";
+                }
+            }
+            $requete="INSERT INTO serie (serie_code,serie_nom,statut_code,AVANCEE_CODE_AVANCEE) values ($dernier,'$nom','$type','$statut')";
             majDonneesPrepareesPDO(preparerRequetePDO(CONN,$requete));
-            echo "cest bon !";
+            echo "<p>C'est bon !</p>";
         }
        
     }
