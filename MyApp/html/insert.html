@@ -1,0 +1,60 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+    </head>
+
+<body>
+
+
+    <form  name="insertion" action = "../php/res_insert.php" method="post">
+        <fieldset>
+            <h2>Informations obligatoires:</h2>
+            <p>Nom de la série:</p>
+            <input name="nom" type="text" placeholder="nom" required>
+            <br>
+           
+           
+            <p>Type de série:</p>
+            <input name="type" type="radio" id="manga_type" value="MANGA" required>
+            <label for="manga_type">Manga</label>
+
+            <input name="type" type="radio" id="anime_type" value="ANIME">
+            <label for="anime_type">Animé</label>
+
+            <input name="type" type="radio" id="manwha_type" value="MANWHA">
+            <label for="manwha_type">Manwha</label>
+
+            <input name="type" type="radio" id="ln_type" value="LN">
+            <label for="ln_type">Light novel</label>
+
+            <input name="type" type="radio" id="la_type" value="LIVE_ACTION">
+            <label for="la_type">Live action</label>
+            
+
+            <p>Où est ce que j'en suis:</p>
+            <input name="statut_moi" id="jaifini" type="radio" required>
+            <label for="jaifini">J'ai terminé</label>
+
+            <input name="statut_moi" id="jaipasfini" type="radio">
+            <label for="jaipasfini">Je n'ai pas terminé</label>
+        </fieldset>
+
+        <fieldset>
+            <h2>Pour aller plus loin:</h2>
+
+            <input name="commentaire" type="text" placeholder="Laissez un commentaire">
+
+        </fieldset>
+        <fieldset>
+            <button type="submit" >Ajouter</button>
+        </fieldset>
+        
+    </form>
+
+    <a href="../index.html">Retour à l'accueil</a>
+
+
+</body>
+
+
+</html>

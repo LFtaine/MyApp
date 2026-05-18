@@ -1,5 +1,5 @@
-<html>
-    <body>
+
+
 
         <?php
             include_once "pdo_agile.php";
@@ -8,8 +8,9 @@
             
     
                 
-           
-            echo "bleh";
+
+           $accueil="../index.html";
+            echo "<br><a href='".$accueil."'>Retour à l'accueil</a>" ;
             
                // $sql = "select LAST_INSERT_ID from historique";
                 
@@ -42,5 +43,4 @@
                 J'ai $avancee le $media, $fin</p>" ;
                 echo "<a href='../html/select.html'>Retour à la recherche </a>";
         ?>
-</body>
-</html>
+

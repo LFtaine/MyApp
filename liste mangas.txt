@@ -26,7 +26,7 @@
 012) Crazy D. Demonic Hearthbreak ✅
 013) Thus Spoke Kishibe Rohan ✅☑️
 014) Dead Man's Questions ✅
-015) Fullmetal alchemist ✅🔵🔶
+015) Fullmetal alchemist ✅🔵  
 016) Naruto ✅🔵🔴
 017) Boruto ✅🔵 
 018) Naruto: Konoha's Story ✅
@@ -73,7 +73,7 @@
 059) Yakitate Ja-pan ✅
 060) Assassination classroom ✅☑️🔴
 061) Le samouraï insaisissable ❎
-062) Jujutsu kaisen ✅☑️🔶
+062) Jujutsu kaisen ✅☑️  
 063) Dandadan ✅
 064) Kaiju n°8 ✅🔴
 065) Mashle ✅
@@ -91,7 +91,7 @@
 077) Noragami ✅
 078) Beelzebub ✅🔴
 079) Hideout ✅❌
-080) Akira ✅🔶
+080) Akira ✅  
 081) Yomotsuhegui ✅❌
 082) Monster ✅
 083) Pupa ✅☑️❌
@@ -101,7 +101,7 @@
 087) Soul Eater ✅🔴
 088) D-Gray Man ✅
 089) 666 Satan ✅🔴
-090) Les liens du sang ✅🔶
+090) Les liens du sang ✅  
 091) B the beginning ☑️
 092) Sky-high survival ❎🔵🔴
 093) High-school of the dead 🔵
@@ -109,13 +109,13 @@
 095) Bonne nuit Punpun ✅🔴
 096) Spy X Family ❎🔵🔴
 097) Tokyo Revengers ✅🔵🔴
-098) A silent voice ✅🔶
-099) Berserk ✅🔶
+098) A silent voice ✅  
+099) Berserk ✅  
 100) Birdmen ✅🔴
-101) Ascension ✅🔶
+101) Ascension ✅  
 102) Alice in borderland ✅🔴⚪
-103) Alice in Borderland retry ✅🔶
-104) Alice on Border road ✅🔶
+103) Alice in Borderland retry ✅  
+104) Alice on Border road ✅  
 105) Thermae romae ❎
 106) Four knights of apocalypse ❎
 107) Darling in the franxx 🔵
@@ -211,7 +211,7 @@
 197) Poison city ✅❌
 198) Dead tube ❎
 199) Blame! ✅☑️🔴
-200) Manhole ✅🔶
+200) Manhole ✅  
 201) La Légende d'Arslan ❎
 202) Yomi no Tsugai ❎
 203) World trigger ✅
@@ -235,7 +235,7 @@
 221) Fire punch ✅❌
 222) Sayonara football ❎
 223) Valkyrie apocalypse ✅🔵
-224) My home hero ✅🔶
+224) My home hero ✅  
 225) Dai Dark ❎
 226) Mermaids Saga ✅🔴
 227) World's End Harem ❎🔵
@@ -264,7 +264,7 @@
 250) Just listen to the song ✅
 251) Death:Rescheduled 🟣✅
 252) L'obscurité en moi 🟣✅
-253) Vinland Saga ✅🔶
+253) Vinland Saga ✅  
 254) Reborn! ✅
 256) Asadora! ❎
 257) Terra Formars ✅
@@ -283,7 +283,7 @@
 270) Blue Lock - Épisode Nagi ❎
 271) Cyberpunk Edgerunner ☑️
 272) Fool Night ✅❌
-273)Les péchés de la famille Ichinose✅🔶
+273)Les péchés de la famille Ichinose✅  
 274) Solo Leveling 🟣✅🔵
 275) Hell's Paradise ✅🔴
 276) Hell's Paradise Side Story ✅
@@ -296,7 +296,7 @@
 283) Happy Land ✅❌
 284) Sun-Ken-Rock ✅
 285) Golden Boy 🔵
-286) Elfen Lied ✅🔶
+286) Elfen Lied ✅  
 287) Tokyo Aliens ❎
 288) Unblessed ✅
 289) Darker than Black ✅❌
@@ -312,7 +312,7 @@
 299) Dimension W ❎
 300) Aliens Area ❎
 301) Space Brothers ❎
-302) Homunculus ✅🔶
+302) Homunculus ✅  
 303) Astro Boy 🔵
 304) Terror in Resonance ☑️
 305) Snk 0 ✅❌
@@ -321,11 +321,11 @@
 308) Psycho-Pass 🔵
 309) Im ❎
 310) L'école emportée ❎🔴
-311) Btooom! ✅🔶
+311) Btooom! ✅  
 313) Juujika no rokunin ✅❌
 314) Gestalt ✅❌
 315) Last Hero Inuyashiki ✅🔴
-316) Deadman Wonderland ✅🔶
+316) Deadman Wonderland ✅  
 317) Summertime Rendering ☑️
 318) Bucket list of the dead ✅
 319) Kengan Ashura ✅
@@ -361,7 +361,7 @@
 349) Blade of the Moon Princess ❎
 350) Prophecy ✅
 351) Starving Anonymous ✅
-352) Kokkoku ✅🔶
+352) Kokkoku ✅  
 353) Lookism 🟣✅
 354) Manager Kim 🟣✅
 355) One Shot Marriage Toxin ✅❌
@@ -385,12 +385,12 @@
 373) Atsro Baby ❎
 374) Blood C ☑️
 375) Skeleton Double ✅❌
-376) Gleipnir ✅🔶
+376) Gleipnir ✅  
 377) Ankoku delta ✅
 378) Killer Peter 🟣✅
 379) Durarara !! ✅
 380) The summer Hikaru died ✅
-381) gift of poison ✅🔶
+381) gift of poison ✅  
 382) Astro Royale ✅❌
 383) ByeByeBye ❎
 384) Wind Breaker ✅
@@ -413,19 +413,19 @@
 401) I am a hero ✅🔴
 402) Kingdom ✅
 403) Juvenile Detention Center 🟣✅
-404) Drama Queen ✅🔶
+404) Drama Queen ✅  
 405) Hectopascal 🟣✅
 406) Study group 🟣✅
 407) Pour ne pas mourir 🟣❎
 408) Solo leveling: Ragnarok 🟣✅
-409) Usogui ✅🔶 
+409) Usogui ✅   
 410) Frieren ✅🔴
 411) Ichi the witch ✅
 412) Gokurakugai ✅
-413) Call of the night ✅🔶
+413) Call of the night ✅  
 414) Laws of the universe ✅
 415) The great war 🟣❎
-416) Seraph of the end ✅🔶
+416) Seraph of the end ✅  
 417) After God ✅❌ 
 418) Ryota killed his brother ✅
 419) Versus ❎
@@ -540,7 +540,7 @@
 525) Copycat ✅🟣
 526) Love of kill 🔵 
 527) Amnesia 🔵 
-528) Madoka ☑️🔶 
+528) Madoka ☑️   
 529) Le prisme de l'amour ☑️ 
 530) I love you so I kill you ❎ 
 531) Serial experiment lain 🔵
