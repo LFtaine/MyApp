@@ -100,6 +100,7 @@ CREATE TABLE SERIE
    STATUT_CODE          CHAR(32)     NOT NULL ,
    SERIE_DATE_D         DATE         ,
    SERIE_DATE_F         DATE         ,
+   COMMENTAIRE          VARCHAR(255),
    FIN INT(1) NOT NULL DEFAULT '0' 
    COMMENT '0 si encore en cours, 1 si il y a une fin',
      PRIMARY KEY (SERIE_CODE),
@@ -930,7 +931,10 @@ INSERT INTO SERIE (SERIE_CODE, SERIE_NOM, AVANCEE_CODE_AVANCEE, STATUT_CODE, FIN
 (620, 'Castlevania Nocturne', 'ANIME_EN_COURS', 'ANIME', 0),
 (621, 'Danganronpa', 'LECTURE_TERMINEE', 'MANGA', 1),
 (622, 'L''ère des cristaux', 'ANIME_EN_COURS', 'ANIME', 0),
-(623, 'Kiznaiver', 'ANIME_TERMINE', 'ANIME', 0);
+(623, 'Kiznaiver', 'ANIME_TERMINE', 'ANIME', 0),
+(624, 'Undertaker Riddle','LECTURE_EN_COURS', 'MANGA',0),
+(625, 'Hana ne peut pas vivre sans moi','LECTURE_EN_COURS', 'MANGA',0),
+(626, 'Nippon Sangoku','LECTURE_EN_COURS', 'MANGA',0);
 
 INSERT INTO TEXTE (SERIE_CODE) VALUES
 (1),
@@ -1387,7 +1391,10 @@ INSERT INTO TEXTE (SERIE_CODE) VALUES
 (594),
 (607),
 (612),
-(621);
+(621),
+(624),
+(625),
+(626);
 
 INSERT INTO MANGA (CODE_MANGA, SERIE_CODE, NOM) VALUES
 (1, 1, 'Jojo part 1 : Phantom Blood'),
@@ -1740,7 +1747,10 @@ INSERT INTO MANGA (CODE_MANGA, SERIE_CODE, NOM) VALUES
 (348, 593, 'Yami hero'),
 (349, 594, 'On l''a fait'),
 (350, 612, 'I love you so I kill you'),
-(351, 621, 'Danganronpa');
+(351, 621, 'Danganronpa'),
+(352, 624, 'Undertaker Riddle'),
+(353, 625, 'Hana ne peut pas vivre sans moi'),
+(354, 626, 'Nippon Sangoku');
 
 INSERT INTO MANWHA (CODE_MANWHA, SERIE_CODE, NOM) VALUES
 (1, 42, 'Tower of God'),

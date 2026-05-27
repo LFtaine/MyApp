@@ -9,31 +9,16 @@
 		
 		echo "<a href=../index.html>Retour à l'accueil</a>";	
 		
-		$nom = $_POST["nom"] ?? null;
+		$nom = $_POST["nom"];
 
 		if (!empty($nom)) {
 			lireDonneesTexte(CONN);
 		}
 	}
-	else
+	else{
 		echo ("<hr/> Connexion impossible à la base de données <br/>");
-	
-	function insererDonnee($c){
-		$sql = "INSERT INTO serie (SERIE_CODE, SERIE_NOM, AVANCEE_CODE_AVANCEE,STATUT_CODE) VALUES (1902,'serie_test','ANIME_TERMINE','MANGA')";
-		afficherObj($sql);
-		$sql_preparee=preparerRequetePDO($c,$sql);
-		$res = majDonneesPrepareesPDO($sql_preparee);
-		echo "Résultats de la requête " ,$res . "<br/>";
 	}
-	
-	function corrigerDonnees($c){
-		$sql = "update bidon set ...'";
-		afficherObj($sql);
-		echo "Résultats de la requête " . $res . "<br/>";
-	}
-
-
-	
+		
 
 	function update_historique($c,$prev){
 		$sql = "INSERT INTO historique (SERIE_CODE) VALUES ($prev)";

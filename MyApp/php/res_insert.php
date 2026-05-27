@@ -62,11 +62,16 @@
             $requete_table_specifique="INSERT INTO ".$type.""." (".getcode($type).",serie_code,nom) values (".dernierdutype($type).",".$dernier.",'".$nom."')";
             majDonneesPrepareesPDO(preparerRequetePDO(CONN,$requete_table_specifique));
 
+            if(!empty($_POST["commentaire"])){
+                $modif_com= "UPDATE SERIE SET COMMENTAIRE='".$_POST["commentaire"]."' WHERE serie_code=".$dernier."";
+                 majDonneesPrepareesPDO(preparerRequetePDO(CONN,$modif_com));
+            }
+
             echo "<p>C'est bon !</p>";
         }
        
     }
-
+    
     function getcode($type){
         if($type=="LIVE_ACTION"){
         $code="LA_CODE";
