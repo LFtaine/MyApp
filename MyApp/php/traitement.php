@@ -3,25 +3,17 @@
 	include_once "pdo_agile.php";
 	include_once "connexion.php";
 	echo '<meta charset="utf-8"> ';
-	
-	/*
-	$db_username = "root";
-	$db_password = ""; //
-	$db = "mysql:host=localhost;dbname=maliste;charset=UTF8";
-	echo "test\n";
-		
-	$conn = OuvrirConnexionPDO($db,$db_username,$db_password); 
-	*/
+
+
 	if (CONN){
-		echo ("<hr/> Connexion réussie à la base de données <br/><br/><br/>");
+		
+		echo "<a href=../index.html>Retour à l'accueil</a>";	
 		
 		$nom = $_POST["nom"] ?? null;
 
 		if (!empty($nom)) {
 			lireDonneesTexte(CONN);
 		}
-		//insererDonnee($conn); //fonctionnel mais ne pas en abuser pour éviter les erreurs
-		//corrigerDonnees($conn);
 	}
 	else
 		echo ("<hr/> Connexion impossible à la base de données <br/>");
@@ -37,7 +29,6 @@
 	function corrigerDonnees($c){
 		$sql = "update bidon set ...'";
 		afficherObj($sql);
-		//$res = // compléter
 		echo "Résultats de la requête " . $res . "<br/>";
 	}
 
@@ -61,7 +52,13 @@
 	
 		$res=LireDonneesPDO1($c,$sql,$donnee);
 
-		foreach($donnee as $indice=> $l){
+		if(empty($donnee)){
+			echo "<br>Aucune série correspondante";
+		}
+		else{
+
+		}
+			foreach($donnee as $indice=> $l){
 
 			if($l["STATUT_CODE"] == "MANGA"){
 				$media="lire";

@@ -33,6 +33,9 @@
                 if($fini=="fini"){
                     $statut="ANIME_TERMINE";
                 }
+                else if($fini=="plustard"){
+                    $statut="PLUS_TARD_A";
+                }
                 else{
                     $statut="ANIME_EN_COURS";
                 }
@@ -41,17 +44,51 @@
                 if($fini=="fini"){
                     $statut="LECTURE_TERMINEE";
                 }
+                else if($fini=="plustard"){
+                    $statut="PLUS_TARD_M";
+                }
                 else{
                     $statut="LECTURE_EN_COURS";
                 }
             }
             $requete="INSERT INTO serie (serie_code,serie_nom,statut_code,AVANCEE_CODE_AVANCEE) values ($dernier,'$nom','$type','$statut')";
             majDonneesPrepareesPDO(preparerRequetePDO(CONN,$requete));
+
+            if(!($type=="ANIME" || $type=="LIVE_ACTION")){
+                $requete_texte="INSERT INTO TEXTE (serie_code) values (".$dernier.")";
+                majDonneesPrepareesPDO(preparerRequetePDO(CONN,$requete_texte));
+            }
+
+            $requete_table_specifique="INSERT INTO ".$type.""." (".getcode($type).",serie_code,nom) values (".dernierdutype($type).",".$dernier.",'".$nom."')";
+            majDonneesPrepareesPDO(preparerRequetePDO(CONN,$requete_table_specifique));
+
             echo "<p>C'est bon !</p>";
         }
        
     }
+
+    function getcode($type){
+        if($type=="LIVE_ACTION"){
+        $code="LA_CODE";
+        }
+        else{
+            $code="CODE_".$type;
+        }
+        return $code;
+    }
        
+    
+    function dernierdutype($type){        
+       
+        $requete_indice="SELECT max(".getcode($type).") as serie_code from $type";
+        LireDonneesPDO1(CONN,$requete_indice,$valeurs);
+        
+        $dernier=$valeurs[0]['serie_code']+1;
+        return $dernier;
+    }
+    
+    
+    
     
 
     function donnee_existe($c,$nom,$type){

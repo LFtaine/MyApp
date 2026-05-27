@@ -1,26 +1,24 @@
 <?php
 
 	include_once "pdo_agile.php";
+	include_once "connexion.php";
 	echo '<meta charset="utf-8"> ';
 	
-	
+	/*
 	$db_username = "root";
 	$db_password = ""; //
 	$db = "mysql:host=localhost;dbname=maliste;charset=UTF8";
 	echo "test\n";
 		
 	$conn = OuvrirConnexionPDO($db,$db_username,$db_password); 
-
-	if ($conn){
+	*/
+	if (CONN){
 		echo ("<hr/> Connexion réussie à la base de données <br/><br/><br/>");
-		$index = $_POST["index"] ?? null;
+		
 		$nom = $_POST["nom"] ?? null;
 
-		if (!empty($index)) {
-    		lireDonneesNum($conn);
-		}
-		else if (!empty($nom)) {
-			lireDonneesTexte($conn);
+		if (!empty($nom)) {
+			lireDonneesTexte(CONN);
 		}
 		//insererDonnee($conn); //fonctionnel mais ne pas en abuser pour éviter les erreurs
 		//corrigerDonnees($conn);
@@ -43,35 +41,8 @@
 		echo "Résultats de la requête " . $res . "<br/>";
 	}
 
-	function lireDonneesNum($c){
-		$numero=$_POST["index"];
-		$sql = "select * from serie where serie_code = $numero";
-		LireDonneesPDO1($c,$sql,$donnee);
 
-		if($donnee[0]["STATUT_CODE"] == "MANGA"){
-			$media="lire";
-		}
-		else{
-			$media="regarder";
-		}
-
-		if($donnee[0]["AVANCEE_CODE_AVANCEE"] == "ANIME_TERMINE" || $donnee[0]["AVANCEE_CODE_AVANCEE"] == "LECTURE_TERMINEE" ){
-			$avancee="finis de";
-		}
-		else{
-			$avancee="commencé à";
-		}
-
-		if($donnee[0]["FIN"]){
-			$fin="cette série est terminée.";
-		}
-		else{
-			$fin="cette série n'est pas terminée.";
-		}
-
-		echo "<p>la série s'appelle ".$donnee[0]["SERIE_NOM"]." c'est un ".strtolower($donnee[0]["STATUT_CODE"])." et j'ai $avancee la $media, $fin</p>" ;
-		return $donnee;
-	}
+	
 
 	function update_historique($c,$prev){
 		$sql = "INSERT INTO historique (SERIE_CODE) VALUES ($prev)";
@@ -122,8 +93,6 @@
 		}			
 
 
-		
-		
 			return $donnee;
 	}
 	
