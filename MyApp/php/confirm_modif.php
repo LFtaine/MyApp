@@ -1,105 +1,59 @@
+<h1>Confirmation</h1>
 <?php
 
 	include_once "pdo_agile.php";
 	include_once "connexion.php";
 	echo '<meta charset="utf-8"> ';
 	
-	/*
-	$db_username = "root";
-	$db_password = ""; //
-	$db = "mysql:host=localhost;dbname=maliste;charset=UTF8";
-	echo "test\n";
-		
-	$conn = OuvrirConnexionPDO($db,$db_username,$db_password); 
-	*/
 	if (CONN){
-		echo ("<hr/> Connexion réussie à la base de données <br/><br/><br/>");
 		
-		$nom = $_POST["nom"] ?? null;
-
-		if (!empty($nom)) {
-			lireDonneesTexte(CONN);
-		}
-		//insererDonnee($conn); //fonctionnel mais ne pas en abuser pour éviter les erreurs
-		//corrigerDonnees($conn);
+		afficheDonnees(CONN);
 	}
-	else
+	else{
 		echo ("<hr/> Connexion impossible à la base de données <br/>");
-	
-	function insererDonnee($c){
-		$sql = "INSERT INTO serie (SERIE_CODE, SERIE_NOM, AVANCEE_CODE_AVANCEE,STATUT_CODE) VALUES (1902,'serie_test','ANIME_TERMINE','MANGA')";
-		afficherObj($sql);
-		$sql_preparee=preparerRequetePDO($c,$sql);
-		$res = majDonneesPrepareesPDO($sql_preparee);
-		echo "Résultats de la requête " ,$res . "<br/>";
-	}
-	
-	function corrigerDonnees($c){
-		$sql = "update bidon set ...'";
-		afficherObj($sql);
-		//$res = // compléter
-		echo "Résultats de la requête " . $res . "<br/>";
 	}
 
 
-	
 
-	function update_historique($c,$prev){
-		$sql = "INSERT INTO historique (SERIE_CODE) VALUES ($prev)";
-		$sql_preparee=preparerRequetePDO($c,$sql);
-		$res = majDonneesPrepareesPDO($sql_preparee);
-		echo "Résultats de la requête " ,$res . "<br/>";
-	}
-
-	function lireDonneesTexte($c)
+	function afficheDonnees($c)
 	{
-		$texte=$_POST["nom"];
-		$args="lower('%".$texte."%')";
-		$sql = "select * from serie where lower(SERIE_NOM) like $args";
-		$cible="'details.php'";
-		$code="SERIE_CODE";
-	
+		$numero= $_GET['num'];
+		$sql="select * from serie where serie_code = $numero";
+			
 		$res=LireDonneesPDO1($c,$sql,$donnee);
-
+		echo "<h2>Données déjà existantes:</h2>";
+		
 		foreach($donnee as $indice=> $l){
-
-			if($l["STATUT_CODE"] == "MANGA"){
-				$media="lire";
-			}
-			else{
-				$media="regarder";
-			}
-
-			if($l["AVANCEE_CODE_AVANCEE"] == "ANIME_TERMINE" || $l["AVANCEE_CODE_AVANCEE"] == "LECTURE_TERMINEE" ){
-				$avancee="finis de";
-			}
-			else{
-				$avancee="commencé à";
+			foreach($l as $propriete=> $contenu){
+				if(empty($l[$propriete])){
+					echo "<br> $propriete : pas précisé";
+				}
+				else{
+					echo "<br> $propriete : $contenu";
+				}
 			}
 
-			if($l["FIN"]){
-				$fin="cette série est terminée.";
-			}
-			else{
-				$fin="cette série n'est pas terminée.";
-			}
+		}
+		$button_ok= "<br><a href='modif_form.php?num=".$numero."'><button>C'est bien celle que je veux</button></a>";
+		echo $button_ok;
 
-			$page = "details.php?num=" . $l[$code];
+		$button_non= "<br><a href='../html/modif.html'><button>C'est pas la bonne</button></a>";
+		echo $button_non;
 
-			echo "<p>La série s'appelle 
-			<a href='$page'>".$l["SERIE_NOM"]."</a>
-			c'est un ".strtolower($l["STATUT_CODE"])."
-			et j'ai $avancee la $media, $fin</p>";
-		}			
-
-
-			return $donnee;
+		
+		
 	}
 	
-	function afficherObj($obj)
+	function afficherObj($donnee)
 	{
 		echo "<PRE>";
-		print_r($obj);
+		print_r($donnee);
 		echo "</PRE>";
 	}
  ?>
+
+
+
+
+
+
