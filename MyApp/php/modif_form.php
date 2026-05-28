@@ -3,7 +3,7 @@
         <meta charset="utf-8">
     </head>
     <body>
-        <h1>Modification</h1>
+        <h1>Modifications</h1>
         <?php
             include_once "pdo_agile.php";
             include_once "connexion.php";
@@ -16,120 +16,72 @@
             }
 
             function afficheDonnees($c) {
-                $numero = $_GET['num'];
-                $sql = "select * from serie where serie_code = $numero";
+                // Validation : $num doit être un entier
+                $numero = isset($_GET['num']) ? intval($_GET['num']) : 0;
+                if ($numero <= 0) {
+                    echo "<p>Numéro de série invalide.</p>";
+                    return;
+                }
 
-                $res = LireDonneesPDO1($c, $sql, $donnee);
+                $sql = "SELECT * FROM serie WHERE serie_code = :num";
+                $cur = preparerRequetePDO($c, $sql);
+                majDonneesPrepareesTabPDO($cur, [':num' => $numero]);
+                $donnee = $cur->fetchAll(PDO::FETCH_ASSOC);
+
+                if (empty($donnee)) {
+                    echo "<p>Série introuvable.</p>";
+                    return;
+                }
+
                 echo "<h2>Données déjà existantes:</h2>";
 
-                foreach ($donnee as $indice => $l) {
+                foreach ($donnee as $l) {
                     foreach ($l as $propriete => $contenu) {
-                        if (empty($l[$propriete])) {
-                            echo "<br> $propriete : pas précisé";
+                        if (empty($contenu)) {
+                            echo "<br> " . htmlspecialchars($propriete) . " : pas précisé";
                         } else {
-                            echo "<br> $propriete : $contenu";
+                            echo "<br> " . htmlspecialchars($propriete) . " : " . htmlspecialchars($contenu);
                         }
                     }
                 }
 
                 // Sélection du type de série
-                if ($donnee[0]["STATUT_CODE"] == "MANGA") {
-                    $genre_check = '
-                        <input name="type" type="radio" id="manga_type" value="MANGA" required checked>
-                        <label for="manga_type">Manga</label>
-                        <input name="type" type="radio" id="anime_type" value="ANIME">
-                        <label for="anime_type">Animé</label>
-                        <input name="type" type="radio" id="manwha_type" value="MANWHA">
-                        <label for="manwha_type">Manwha</label>
-                        <input name="type" type="radio" id="ln_type" value="LN">
-                        <label for="ln_type">Light novel</label>
-                        <input name="type" type="radio" id="la_type" value="LIVE_ACTION">
-                        <label for="la_type">Live action</label>';
-                } else if ($donnee[0]["STATUT_CODE"] == "ANIME") {
-                    $genre_check = '
-                        <input name="type" type="radio" id="manga_type" value="MANGA" required>
-                        <label for="manga_type">Manga</label>
-                        <input name="type" type="radio" id="anime_type" value="ANIME" checked>
-                        <label for="anime_type">Animé</label>
-                        <input name="type" type="radio" id="manwha_type" value="MANWHA">
-                        <label for="manwha_type">Manwha</label>
-                        <input name="type" type="radio" id="ln_type" value="LN">
-                        <label for="ln_type">Light novel</label>
-                        <input name="type" type="radio" id="la_type" value="LIVE_ACTION">
-                        <label for="la_type">Live action</label>';
-                } else if ($donnee[0]["STATUT_CODE"] == "MANWHA") {
-                    $genre_check = '
-                        <input name="type" type="radio" id="manga_type" value="MANGA" required>
-                        <label for="manga_type">Manga</label>
-                        <input name="type" type="radio" id="anime_type" value="ANIME">
-                        <label for="anime_type">Animé</label>
-                        <input name="type" type="radio" id="manwha_type" value="MANWHA" checked>
-                        <label for="manwha_type">Manwha</label>
-                        <input name="type" type="radio" id="ln_type" value="LN">
-                        <label for="ln_type">Light novel</label>
-                        <input name="type" type="radio" id="la_type" value="LIVE_ACTION">
-                        <label for="la_type">Live action</label>';
-                } else if ($donnee[0]["STATUT_CODE"] == "LN") {
-                    $genre_check = '
-                        <input name="type" type="radio" id="manga_type" value="MANGA" required>
-                        <label for="manga_type">Manga</label>
-                        <input name="type" type="radio" id="anime_type" value="ANIME">
-                        <label for="anime_type">Animé</label>
-                        <input name="type" type="radio" id="manwha_type" value="MANWHA">
-                        <label for="manwha_type">Manwha</label>
-                        <input name="type" type="radio" id="ln_type" value="LN" checked>
-                        <label for="ln_type">Light novel</label>
-                        <input name="type" type="radio" id="la_type" value="LIVE_ACTION">
-                        <label for="la_type">Live action</label>';
-                } else {
-                    $genre_check = '
-                        <input name="type" type="radio" id="manga_type" value="MANGA" required>
-                        <label for="manga_type">Manga</label>
-                        <input name="type" type="radio" id="anime_type" value="ANIME">
-                        <label for="anime_type">Animé</label>
-                        <input name="type" type="radio" id="manwha_type" value="MANWHA">
-                        <label for="manwha_type">Manwha</label>
-                        <input name="type" type="radio" id="ln_type" value="LN">
-                        <label for="ln_type">Light novel</label>
-                        <input name="type" type="radio" id="la_type" value="LIVE_ACTION" checked>
-                        <label for="la_type">Live action</label>';
+                $types = ["MANGA", "ANIME", "MANWHA", "LN", "LIVE_ACTION"];
+                $labels = [
+                    "MANGA"       => "Manga",
+                    "ANIME"       => "Animé",
+                    "MANWHA"      => "Manwha",
+                    "LN"          => "Light novel",
+                    "LIVE_ACTION" => "Live action"
+                ];
+                $ids = [
+                    "MANGA"       => "manga_type",
+                    "ANIME"       => "anime_type",
+                    "MANWHA"      => "manwha_type",
+                    "LN"          => "ln_type",
+                    "LIVE_ACTION" => "la_type"
+                ];
+
+                $genre_check = '';
+                foreach ($types as $i => $t) {
+                    $checked  = ($donnee[0]["STATUT_CODE"] == $t) ? " checked" : "";
+                    $required = ($i === 0) ? " required" : "";
+                    $genre_check .= '<input name="type" type="radio" id="' . $ids[$t] . '" value="' . $t . '"' . $required . $checked . '>
+                        <label for="' . $ids[$t] . '">' . $labels[$t] . '</label>' . "\n";
                 }
 
                 // Sélection du statut de lecture
-                if (
-                    $donnee[0]["AVANCEE_CODE_AVANCEE"] == "LECTURE_EN_COURS" ||
-                    $donnee[0]["AVANCEE_CODE_AVANCEE"] == "ANIME_EN_COURS"
-                ) {
-                    $type_check = '
-                        <p>Où est ce que j\'en suis:</p>
-                        <input name="statut_moi" id="jaifini" type="radio" value="fini" required>
-                        <label for="jaifini">J\'ai terminé</label>
-                        <input name="statut_moi" id="jaipasfini" type="radio" value="pasfini" checked>
-                        <label for="jaipasfini">Je n\'ai pas terminé</label>
-                        <input name="statut_moi" id="plustard" type="radio" value="plustard">
-                        <label for="plustard">Pour plus tard</label>';
-                } else if (
-                    $donnee[0]["AVANCEE_CODE_AVANCEE"] == "LECTURE_TERMINEE" ||
-                    $donnee[0]["AVANCEE_CODE_AVANCEE"] == "ANIME_TERMINE"
-                ) {
-                    $type_check = '
-                        <p>Où est ce que j\'en suis:</p>
-                        <input name="statut_moi" id="jaifini" type="radio" value="fini" required checked>
-                        <label for="jaifini">J\'ai terminé</label>
-                        <input name="statut_moi" id="jaipasfini" type="radio" value="pasfini">
-                        <label for="jaipasfini">Je n\'ai pas terminé</label>
-                        <input name="statut_moi" id="plustard" type="radio" value="plustard">
-                        <label for="plustard">Pour plus tard</label>';
-                } else {
-                    $type_check = '
-                        <p>Où est ce que j\'en suis:</p>
-                        <input name="statut_moi" id="jaifini" type="radio" value="fini" required>
-                        <label for="jaifini">J\'ai terminé</label>
-                        <input name="statut_moi" id="jaipasfini" type="radio" value="pasfini">
-                        <label for="jaipasfini">Je n\'ai pas terminé</label>
-                        <input name="statut_moi" id="plustard" type="radio" value="plustard" checked>
-                        <label for="plustard">Pour plus tard</label>';
-                }
+                $avancee = $donnee[0]["AVANCEE_CODE_AVANCEE"];
+                $en_cours  = ($avancee == "LECTURE_EN_COURS"  || $avancee == "ANIME_EN_COURS");
+                $termine   = ($avancee == "LECTURE_TERMINEE"  || $avancee == "ANIME_TERMINE");
+
+                $type_check = '<p>Où est ce que j\'en suis:</p>
+                    <input name="statut_moi" id="jaifini" type="radio" value="fini" required' . ($termine ? " checked" : "") . '>
+                    <label for="jaifini">J\'ai terminé</label>
+                    <input name="statut_moi" id="jaipasfini" type="radio" value="pasfini"' . ($en_cours ? " checked" : "") . '>
+                    <label for="jaipasfini">Je n\'ai pas terminé</label>
+                    <input name="statut_moi" id="plustard" type="radio" value="plustard"' . (!$en_cours && !$termine ? " checked" : "") . '>
+                    <label for="plustard">Pour plus tard</label>';
 
                 $formulaire = '
                     <form id="modif_form" method="POST">
@@ -144,6 +96,8 @@
                         <fieldset>
                             <input name="commentaire" type="text" placeholder="Laissez un commentaire" value="' . htmlspecialchars($donnee[0]['COMMENTAIRE']) . '">
                         </fieldset>
+                        <input type="hidden" name="num" value="' . $numero . '">
+                        <button type="submit">Valider</button>
                     </form>';
                 echo $formulaire;
             }
