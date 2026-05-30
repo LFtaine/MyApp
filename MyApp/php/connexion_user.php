@@ -29,22 +29,33 @@
     }
 ?>
 <html>
-
 <body>
     <h1>Connexion</h1>
-    <a href="inscription.html">Je n'ai pas encore de compte</a>
 
-    <form method="post">
-        <input name="login" type="text" placeholder="Login">
-        <input name="mdp" type="password" placeholder="Mot de passe">
-        <button type="submit">Connexion</button>
-
-    </form>
+    <?php if (isset($_SESSION["utilisateur_id"])): ?>
+        <p>Vous êtes déjà connecté en tant que <strong><?= htmlspecialchars($_SESSION["login"]) ?></strong>.</p>
+        <a href="deconnexion.php">Me déconnecter</a>
+        <a href="../index.html">Retour à l'accueil</a>
+    <?php else: ?>
+        <a href="inscription.php">Je n'ai pas encore de compte</a>
+        <form method="post">
+            <input name="login" type="text" placeholder="Login">
+            <input name="mdp" type="password" placeholder="Mot de passe">
+            <button type="submit">Connexion</button>
+        </form>
+    <?php endif; ?>
 
 </body>
-
-
 </html>
+
+
+
+
+
+
+
+
+
 
 
 
