@@ -9,6 +9,7 @@
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="../style/style.css">
+    <title>Modification</title>
 </head>
 <body>
     <a href="../index.php">Retour à l'accueil</a>

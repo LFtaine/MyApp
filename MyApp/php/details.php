@@ -10,6 +10,7 @@
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="../style/style.css">
+    <title>Détails</title>
 </head>
 <body>
     <a href="../index.php">Retour à l'accueil</a>

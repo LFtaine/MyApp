@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="style/style.css">
+    <title>Accueil</title>
 </head>
 <body>
     <?php if (isset($_SESSION["utilisateur_id"])): ?>

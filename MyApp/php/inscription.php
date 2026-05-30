@@ -34,6 +34,7 @@
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="../style/style.css">
+    <title>Inscription</title>
 </head>
 <body>
     <h1>Inscription</h1>
