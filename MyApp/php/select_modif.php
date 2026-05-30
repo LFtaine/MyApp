@@ -1,23 +1,26 @@
 <?php session_start(); ?>
 <?php
-
     include_once "pdo_agile.php";
     include_once "connexion.php";
-    // TODO: remplacer par $utilisateur_id = $_SESSION["utilisateur_id"];
-     $utilisateur_id = $_SESSION["utilisateur_id"];
 
-    echo '<meta charset="utf-8"> ';
+    $utilisateur_id = $_SESSION["utilisateur_id"];
+?>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../style/style.css">
+</head>
+<body>
+    <a href="../index.php">Retour à l'accueil</a>
 
+    <?php
     if (CONN) {
-        echo "<a href='../index.html'>Retour à l'accueil</a>";
-
         $nom = isset($_POST["nom"]) ? trim(strip_tags($_POST["nom"])) : "";
-
         if (!empty($nom)) {
             lireDonneesTexte(CONN, $nom, $utilisateur_id);
         }
     } else {
-        echo ("<hr/> Connexion impossible à la base de données <br/>");
+        echo "<p>Connexion impossible à la base de données.</p>";
     }
 
     function lireDonneesTexte($c, $texte, $utilisateur_id) {
@@ -36,23 +39,13 @@
         $donnee = $cur->fetchAll(PDO::FETCH_ASSOC);
 
         if (empty($donnee)) {
-            echo "<br>Aucune série correspondante";
+            echo "<p>Aucune série correspondante.</p>";
             return;
         }
 
         foreach ($donnee as $l) {
-            if ($l["STATUT_CODE"] == "MANGA") {
-                $media = "lire";
-            } else {
-                $media = "regarder";
-            }
-
-            if ($l["AVANCEE_CODE_AVANCEE"] == "ANIME_TERMINE" || $l["AVANCEE_CODE_AVANCEE"] == "LECTURE_TERMINEE") {
-                $avancee = "finis de";
-            } else {
-                $avancee = "commencé à";
-            }
-
+            $media   = ($l["STATUT_CODE"] == "MANGA") ? "lire" : "regarder";
+            $avancee = ($l["AVANCEE_CODE_AVANCEE"] == "ANIME_TERMINE" || $l["AVANCEE_CODE_AVANCEE"] == "LECTURE_TERMINEE") ? "finis de" : "commencé à";
             $fin         = $l["FIN"] ? "cette série est terminée." : "cette série n'est pas terminée.";
             $page        = "confirm_modif.php?num=" . intval($l["SERIE_CODE"]);
             $nom_affiche = htmlspecialchars($l["SERIE_NOM"]);
@@ -61,10 +54,6 @@
             echo "<p>La série s'appelle <a href='$page'>$nom_affiche</a> c'est un $statut et j'ai $avancee la $media, $fin</p>";
         }
     }
-
-    function afficherObj($obj) {
-        echo "<PRE>";
-        print_r($obj);
-        echo "</PRE>";
-    }
-?>
+    ?>
+</body>
+</html>

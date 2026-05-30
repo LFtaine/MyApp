@@ -1,19 +1,24 @@
 <?php session_start(); ?>
-
-<h1>Confirmation</h1>
 <?php
-
     include_once "pdo_agile.php";
     include_once "connexion.php";
 
-     $utilisateur_id = $_SESSION["utilisateur_id"];
+    $utilisateur_id = $_SESSION["utilisateur_id"];
+?>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../style/style.css">
+</head>
+<body>
+    <a href="../index.php">Retour à l'accueil</a>
+    <h1>Confirmation</h1>
 
-    echo '<meta charset="utf-8"> ';
-
+    <?php
     if (CONN) {
         afficheDonnees(CONN, $utilisateur_id);
     } else {
-        echo ("<hr/> Connexion impossible à la base de données <br/>");
+        echo "<p>Connexion impossible à la base de données.</p>";
     }
 
     function afficheDonnees($c, $utilisateur_id) {
@@ -23,7 +28,6 @@
             return;
         }
 
-        // Jointure pour récupérer l'avancée propre à l'utilisateur courant
         $sql = "SELECT s.*, us.AVANCEE_CODE_AVANCEE, us.COMMENTAIRE
                 FROM serie s
                 INNER JOIN UTILISATEUR_SERIE us
@@ -42,28 +46,21 @@
             return;
         }
 
-        echo "<h2>Données déjà existantes:</h2>";
+        echo "<h2>Données déjà existantes :</h2>";
 
         foreach ($donnee as $l) {
             foreach ($l as $propriete => $contenu) {
                 if (empty($contenu)) {
-                    echo "<br> " . htmlspecialchars($propriete) . " : pas précisé";
+                    echo "<br>" . htmlspecialchars($propriete) . " : pas précisé";
                 } else {
-                    echo "<br> " . htmlspecialchars($propriete) . " : " . htmlspecialchars($contenu);
+                    echo "<br>" . htmlspecialchars($propriete) . " : " . htmlspecialchars($contenu);
                 }
             }
         }
 
-        $button_ok  = "<br><a href='modif_form.php?num=" . $numero . "'><button>C'est bien celle que je veux</button></a>";
-        echo $button_ok;
-
-        $button_non = "<br><a href='../html/modif.html'><button>C'est pas la bonne</button></a>";
-        echo $button_non;
+        echo "<br><br><a href='modif_form.php?num=" . $numero . "'><button>C'est bien celle que je veux</button></a>";
+        echo "<br><br><a href='../html/modif.html'><button>C'est pas la bonne</button></a>";
     }
-
-    function afficherObj($donnee) {
-        echo "<PRE>";
-        print_r($donnee);
-        echo "</PRE>";
-    }
-?>
+    ?>
+</body>
+</html>

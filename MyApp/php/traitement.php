@@ -7,7 +7,7 @@
 
 	if (CONN){
 		
-		echo "<a href=../index.html>Retour à l'accueil</a>";	
+		echo "<a href=../index.php>Retour à l'accueil</a>";	
 		
 		$nom = $_POST["nom"];
 
