@@ -1,7 +1,11 @@
+<?php session_start(); ?>
 <?php
 
     include_once "pdo_agile.php";
     include_once "connexion.php";
+   
+    $utilisateur_id = $_SESSION["utilisateur_id"];
+
     echo '<meta charset="utf-8"> ';
 
     if (CONN) {
@@ -10,17 +14,25 @@
         $nom = isset($_POST["nom"]) ? trim(strip_tags($_POST["nom"])) : "";
 
         if (!empty($nom)) {
-            lireDonneesTexte(CONN, $nom);
+            lireDonneesTexte(CONN, $nom, $utilisateur_id);
         }
     } else {
         echo ("<hr/> Connexion impossible à la base de données <br/>");
     }
 
-    function lireDonneesTexte($c, $texte) {
-        // Requête préparée avec LIKE et paramètre lié
-        $sql = "SELECT * FROM serie WHERE lower(SERIE_NOM) LIKE lower(:search) ORDER BY serie_nom";
+    function lireDonneesTexte($c, $texte, $utilisateur_id) {
+        $sql = "SELECT s.*, us.AVANCEE_CODE_AVANCEE, us.COMMENTAIRE
+                FROM serie s
+                INNER JOIN UTILISATEUR_SERIE us
+                    ON s.SERIE_CODE = us.SERIE_CODE
+                    AND us.UTILISATEUR_ID = :utilisateur_id
+                WHERE lower(s.SERIE_NOM) LIKE lower(:search)
+                ORDER BY s.SERIE_NOM";
         $cur = preparerRequetePDO($c, $sql);
-        majDonneesPrepareesTabPDO($cur, [':search' => '%' . $texte . '%']);
+        majDonneesPrepareesTabPDO($cur, [
+            ':utilisateur_id' => $utilisateur_id,
+            ':search'         => '%' . $texte . '%'
+        ]);
         $donnee = $cur->fetchAll(PDO::FETCH_ASSOC);
 
         if (empty($donnee)) {
@@ -41,8 +53,8 @@
                 $avancee = "commencé à";
             }
 
-            $fin  = $l["FIN"] ? "cette série est terminée." : "cette série n'est pas terminée.";
-            $page = "details.php?num=" . intval($l["SERIE_CODE"]);
+            $fin         = $l["FIN"] ? "cette série est terminée." : "cette série n'est pas terminée.";
+            $page        = "details.php?num=" . intval($l["SERIE_CODE"]);
             $nom_affiche = htmlspecialchars($l["SERIE_NOM"]);
             $statut      = htmlspecialchars(strtolower($l["STATUT_CODE"]));
 

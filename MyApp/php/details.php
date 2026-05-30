@@ -1,21 +1,34 @@
+<?php session_start(); ?>
+
 <?php
     include_once "pdo_agile.php";
     include_once "connexion.php";
+    // TODO: remplacer par ;
+     $utilisateur_id = $_SESSION["utilisateur_id"];
+
     echo '<meta charset="utf-8"> ';
 
     $accueil = "../index.html";
     echo "<br><a href='" . $accueil . "'>Retour à l'accueil</a>";
 
-    // Validation : $num doit être un entier
     $numero = isset($_GET['num']) ? intval($_GET['num']) : 0;
     if ($numero <= 0) {
         echo "<p>Numéro de série invalide.</p>";
         exit;
     }
 
-    $sql = "SELECT * FROM serie WHERE serie_code = :num";
+    // Jointure pour récupérer l'avancée propre à l'utilisateur courant
+    $sql = "SELECT s.*, us.AVANCEE_CODE_AVANCEE, us.COMMENTAIRE
+            FROM serie s
+            INNER JOIN UTILISATEUR_SERIE us
+                ON s.SERIE_CODE = us.SERIE_CODE
+                AND us.UTILISATEUR_ID = :user_id
+            WHERE s.SERIE_CODE = :num";
     $cur = preparerRequetePDO(CONN, $sql);
-    majDonneesPrepareesTabPDO($cur, [':num' => $numero]);
+    majDonneesPrepareesTabPDO($cur, [
+        ':user_id' => $utilisateur_id,
+        ':num'     => $numero
+    ]);
     $donnee = $cur->fetchAll(PDO::FETCH_ASSOC);
 
     if (empty($donnee)) {
@@ -35,11 +48,7 @@
         $avancee = "commencé à";
     }
 
-    if ($donnee[0]["FIN"]) {
-        $fin = "cette série est terminée.";
-    } else {
-        $fin = "cette série n'est pas terminée.";
-    }
+    $fin = $donnee[0]["FIN"] ? "cette série est terminée." : "cette série n'est pas terminée.";
 
     $nom_serie = htmlspecialchars($donnee[0]["SERIE_NOM"]);
     $statut    = htmlspecialchars(strtolower($donnee[0]["STATUT_CODE"]));

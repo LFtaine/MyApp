@@ -1,31 +1,44 @@
+<?php session_start(); ?>
 <html>
     <head>
         <meta charset="utf-8">
     </head>
     <body>
+        <a href="../index.html">Retour à l'accueil</a>
         <h1>Modifications</h1>
         <?php
             include_once "pdo_agile.php";
             include_once "connexion.php";
+        
+             $utilisateur_id = $_SESSION["utilisateur_id"];
+
             echo '<meta charset="utf-8"> ';
 
             if (CONN) {
-                afficheDonnees(CONN);
+                afficheDonnees(CONN, $utilisateur_id);
             } else {
                 echo ("<hr/> Connexion impossible à la base de données <br/>");
             }
 
-            function afficheDonnees($c) {
-                // Validation : $num doit être un entier
+            function afficheDonnees($c, $utilisateur_id) {
                 $numero = isset($_GET['num']) ? intval($_GET['num']) : 0;
                 if ($numero <= 0) {
                     echo "<p>Numéro de série invalide.</p>";
                     return;
                 }
 
-                $sql = "SELECT * FROM serie WHERE serie_code = :num";
+                // Jointure pour récupérer l'avancée et le commentaire propres à l'utilisateur courant
+                $sql = "SELECT s.*, us.AVANCEE_CODE_AVANCEE, us.COMMENTAIRE
+                        FROM serie s
+                        INNER JOIN UTILISATEUR_SERIE us
+                            ON s.SERIE_CODE = us.SERIE_CODE
+                            AND us.UTILISATEUR_ID = :user_id
+                        WHERE s.SERIE_CODE = :num";
                 $cur = preparerRequetePDO($c, $sql);
-                majDonneesPrepareesTabPDO($cur, [':num' => $numero]);
+                majDonneesPrepareesTabPDO($cur, [
+                    ':user_id' => $utilisateur_id,
+                    ':num'     => $numero
+                ]);
                 $donnee = $cur->fetchAll(PDO::FETCH_ASSOC);
 
                 if (empty($donnee)) {
@@ -70,10 +83,10 @@
                         <label for="' . $ids[$t] . '">' . $labels[$t] . '</label>' . "\n";
                 }
 
-                // Sélection du statut de lecture
-                $avancee = $donnee[0]["AVANCEE_CODE_AVANCEE"];
-                $en_cours  = ($avancee == "LECTURE_EN_COURS"  || $avancee == "ANIME_EN_COURS");
-                $termine   = ($avancee == "LECTURE_TERMINEE"  || $avancee == "ANIME_TERMINE");
+                // Sélection du statut de lecture (depuis UTILISATEUR_SERIE)
+                $avancee  = $donnee[0]["AVANCEE_CODE_AVANCEE"];
+                $en_cours = ($avancee == "LECTURE_EN_COURS" || $avancee == "ANIME_EN_COURS");
+                $termine  = ($avancee == "LECTURE_TERMINEE" || $avancee == "ANIME_TERMINE");
 
                 $type_check = '<p>Où est ce que j\'en suis:</p>
                     <input name="statut_moi" id="jaifini" type="radio" value="fini" required' . ($termine ? " checked" : "") . '>
@@ -83,7 +96,7 @@
                     <input name="statut_moi" id="plustard" type="radio" value="plustard"' . (!$en_cours && !$termine ? " checked" : "") . '>
                     <label for="plustard">Pour plus tard</label>';
 
-                $formulaire = '
+                $formulaire = '                    
                     <form id="modif_form" method="POST">
                         <h3>Infos obligatoires:</h3>
                         <fieldset>
@@ -94,7 +107,7 @@
                         </fieldset>
                         <h3>Infos bonus</h3>
                         <fieldset>
-                            <input name="commentaire" type="text" placeholder="Laissez un commentaire" value="' . htmlspecialchars($donnee[0]['COMMENTAIRE']) . '">
+                            <input name="commentaire" type="text" placeholder="Laissez un commentaire" value="' . htmlspecialchars($donnee[0]['COMMENTAIRE'] ?? '') . '">
                         </fieldset>
                         <input type="hidden" name="num" value="' . $numero . '">
                         <button type="submit">Valider</button>
@@ -109,6 +122,6 @@
             }
         ?>
 
-        <a href="../index.html">Retour à l'accueil</a>
+       
     </body>
 </html>
