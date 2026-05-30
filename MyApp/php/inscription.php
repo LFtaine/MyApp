@@ -38,6 +38,8 @@
 
 <html>
 <body>
+    <a href="../index.html">Retour à l'accueil</a>
+    <a href="connexion_user.php">Retour à la page de connexion</a>
     <h1>Inscription</h1>
 
     <?php if (isset($erreur)): ?>
