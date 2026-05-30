@@ -9,6 +9,7 @@
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="../style/style.css">
+    <link rel="icon" type="image/x-icon" href="../images/icone.ico">
     <title>Modification</title>
 </head>
 <body>
@@ -29,7 +30,7 @@
             return;
         }
 
-        $sql = "SELECT s.*, us.AVANCEE_CODE_AVANCEE, us.COMMENTAIRE
+        $sql = "SELECT s.SERIE_NOM, s.STATUT_CODE, us.AVANCEE_CODE_AVANCEE, us.COMMENTAIRE
                 FROM serie s
                 INNER JOIN UTILISATEUR_SERIE us
                     ON s.SERIE_CODE = us.SERIE_CODE
@@ -47,55 +48,31 @@
             return;
         }
 
-        echo "<h2>Données déjà existantes :</h2>";
-        foreach ($donnee as $l) {
-            foreach ($l as $propriete => $contenu) {
-                if (empty($contenu)) {
-                    echo "<br>" . htmlspecialchars($propriete) . " : pas précisé";
-                } else {
-                    echo "<br>" . htmlspecialchars($propriete) . " : " . htmlspecialchars($contenu);
-                }
-            }
-        }
-
-        $types  = ["MANGA", "ANIME", "MANWHA", "LN", "LIVE_ACTION"];
-        $labels = ["MANGA" => "Manga", "ANIME" => "Animé", "MANWHA" => "Manwha", "LN" => "Light novel", "LIVE_ACTION" => "Live action"];
-        $ids    = ["MANGA" => "manga_type", "ANIME" => "anime_type", "MANWHA" => "manwha_type", "LN" => "ln_type", "LIVE_ACTION" => "la_type"];
-
-        $genre_check = '';
-        foreach ($types as $i => $t) {
-            $checked  = ($donnee[0]["STATUT_CODE"] == $t) ? " checked" : "";
-            $required = ($i === 0) ? " required" : "";
-            $genre_check .= '<input name="type" type="radio" id="' . $ids[$t] . '" value="' . $t . '"' . $required . $checked . '>
-                <label for="' . $ids[$t] . '">' . $labels[$t] . '</label>' . "\n";
-        }
-
         $avancee  = $donnee[0]["AVANCEE_CODE_AVANCEE"];
-        $en_cours = ($avancee == "LECTURE_EN_COURS" || $avancee == "ANIME_EN_COURS");
-        $termine  = ($avancee == "LECTURE_TERMINEE" || $avancee == "ANIME_TERMINE");
-
-        $type_check = '<p>Où est ce que j\'en suis :</p>
-            <input name="statut_moi" id="jaifini" type="radio" value="fini" required' . ($termine ? " checked" : "") . '>
-            <label for="jaifini">J\'ai terminé</label>
-            <input name="statut_moi" id="jaipasfini" type="radio" value="pasfini"' . ($en_cours ? " checked" : "") . '>
-            <label for="jaipasfini">Je n\'ai pas terminé</label>
-            <input name="statut_moi" id="plustard" type="radio" value="plustard"' . (!$en_cours && !$termine ? " checked" : "") . '>
-            <label for="plustard">Pour plus tard</label>';
+        $en_cours = ($avancee == "LECTURE_EN_COURS"  || $avancee == "ANIME_EN_COURS");
+        $termine  = ($avancee == "LECTURE_TERMINEE"  || $avancee == "ANIME_TERMINE");
 
         echo '
-        <form id="modif_form" method="POST">
+        <h2>' . htmlspecialchars($donnee[0]['SERIE_NOM']) . ' <small>(' . htmlspecialchars($donnee[0]['STATUT_CODE']) . ')</small></h2>
+        <form method="POST" action="exec_modif.php">
             <fieldset>
-                <h2>Infos obligatoires :</h2>
-                <input name="nom" type="text" placeholder="Nom de la série" value="' . htmlspecialchars($donnee[0]['SERIE_NOM']) . '">
-                <p>Type de série :</p>
-                ' . $genre_check . '
-                ' . $type_check . '
+                <legend>Où en êtes-vous ?</legend>
+                <input name="statut_moi" id="jaifini"    type="radio" value="fini"     required' . ($termine              ? " checked" : "") . '>
+                <label for="jaifini">J\'ai terminé</label>
+
+                <input name="statut_moi" id="jaipasfini" type="radio" value="pasfini"' . ($en_cours             ? " checked" : "") . '>
+                <label for="jaipasfini">Je n\'ai pas terminé</label>
+
+                <input name="statut_moi" id="plustard"   type="radio" value="plustard"' . (!$en_cours && !$termine ? " checked" : "") . '>
+                <label for="plustard">Pour plus tard</label>
             </fieldset>
             <fieldset>
-                <h2>Infos bonus :</h2>
-                <input name="commentaire" type="text" placeholder="Laissez un commentaire" value="' . htmlspecialchars($donnee[0]['COMMENTAIRE'] ?? '') . '">
+                <legend>Commentaire</legend>
+                <input name="commentaire" type="text" placeholder="Laissez un commentaire"
+                       value="' . htmlspecialchars($donnee[0]['COMMENTAIRE'] ?? '') . '">
             </fieldset>
-            <input type="hidden" name="num" value="' . $numero . '">
+            <input type="hidden" name="num"  value="' . $numero . '">
+            <input type="hidden" name="type" value="' . htmlspecialchars($donnee[0]['STATUT_CODE']) . '">
             <button type="submit">Valider</button>
         </form>';
     }
