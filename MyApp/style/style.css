@@ -104,3 +104,96 @@ button[type="submit"]:hover {
     color: #cc0000;
     margin-bottom: 10px;
 }
+
+/* ── Autocomplete / suggestions ──────────────────────────── */
+
+.search-wrapper {
+    position: relative;
+    max-width: 400px;
+}
+
+.suggestions-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-top: none;
+    border-radius: 0 0 6px 6px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    box-shadow: 0 4px 12px rgba(0,0,0,.12);
+    z-index: 100;
+    max-height: 280px;
+    overflow-y: auto;
+}
+
+.suggestion-item {
+    padding: 10px 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 14px;
+}
+
+.suggestion-item:last-child { border-bottom: none; }
+
+.suggestion-item:hover,
+.suggestion-item:focus {
+    background-color: #eef4ff;
+}
+
+.sug-already {
+    opacity: .6;
+}
+
+.sug-nom {
+    flex: 1;
+    font-weight: 500;
+    color: #222;
+}
+
+.sug-meta {
+    color: #888;
+    font-size: 12px;
+}
+
+.sug-badge {
+    font-size: 11px;
+    padding: 2px 7px;
+    border-radius: 10px;
+    font-weight: 500;
+}
+
+.sug-badge-db {
+    background: #e8f0fe;
+    color: #1a56db;
+}
+
+.sug-badge-owned {
+    background: #fde8e8;
+    color: #c53030;
+}
+
+/* Résultats live (page recherche) */
+#search-results p {
+    padding: 6px 0;
+}
+
+/* Hints insert */
+.hint-warning {
+    color: #c53030;
+    font-size: 13px;
+    margin-top: 6px;
+}
+
+.hint-info {
+    color: #1a56db;
+    font-size: 13px;
+    margin-top: 6px;
+}

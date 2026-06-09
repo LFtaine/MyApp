@@ -12,7 +12,11 @@
         <fieldset>
             <h2>Informations obligatoires :</h2>
             <p>Nom de la série :</p>
-            <input name="nom" type="text" placeholder="Nom" required>
+            <div class="search-wrapper">
+                <input name="nom" id="nom-input" type="text" placeholder="Nom" required autocomplete="off">
+                <ul id="insert-suggestions" class="suggestions-list" hidden></ul>
+            </div>
+            <div id="insert-hint"></div>
 
             <p>Type de série :</p>
             <input name="type" type="radio" id="manga_type" value="MANGA" required>
@@ -42,5 +46,78 @@
             <button type="submit">Ajouter</button>
         </fieldset>
     </form>
+
+    <script>
+    (function () {
+        const input   = document.getElementById("nom-input");
+        const list    = document.getElementById("insert-suggestions");
+        const hint    = document.getElementById("insert-hint");
+        const radios  = document.querySelectorAll('input[name="type"]');
+        let debounceTimer = null;
+
+        const typeLabels = {
+            manga: "Manga", anime: "Animé", manwha: "Manwha",
+            ln: "Light novel", live_action: "Live action"
+        };
+
+        input.addEventListener("input", function () {
+            clearTimeout(debounceTimer);
+            const q = this.value.trim();
+            hint.innerHTML = "";
+            if (q.length < 1) { list.hidden = true; list.innerHTML = ""; return; }
+            debounceTimer = setTimeout(() => fetchSuggestions(q), 200);
+        });
+
+        function fetchSuggestions(q) {
+            fetch("../php/autocomplete.php?mode=insert&q=" + encodeURIComponent(q))
+                .then(r => r.json())
+                .then(data => {
+                    list.innerHTML = "";
+                    if (data.length === 0) { list.hidden = true; return; }
+                    data.forEach(item => {
+                        const li = document.createElement("li");
+                        li.className = "suggestion-item" + (item.deja_dans_liste ? " sug-already" : "");
+                        const badge = item.deja_dans_liste
+                            ? `<span class="sug-badge sug-badge-owned">Déjà dans votre liste</span>`
+                            : `<span class="sug-badge sug-badge-db">Déjà en base</span>`;
+                        const label = typeLabels[item.type] || item.type;
+                        li.innerHTML = `<span class="sug-nom">${escHtml(item.nom)}</span>
+                                        <span class="sug-meta">${escHtml(label)}</span>
+                                        ${badge}`;
+                        li.addEventListener("mousedown", function (e) {
+                            e.preventDefault();
+                            input.value = item.nom;
+                            list.hidden = true;
+                            // Cocher automatiquement le bon type
+                            radios.forEach(r => {
+                                if (r.value === item.type.toUpperCase()) r.checked = true;
+                            });
+                            if (item.deja_dans_liste) {
+                                hint.innerHTML = `<p class="hint-warning">⚠️ Cette série est déjà dans votre liste.</p>`;
+                            } else {
+                                hint.innerHTML = `<p class="hint-info">ℹ️ Cette série existe déjà en base — elle sera ajoutée directement à votre liste.</p>`;
+                            }
+                        });
+                        list.appendChild(li);
+                    });
+                    list.hidden = false;
+                });
+        }
+
+        document.addEventListener("click", function (e) {
+            if (!input.contains(e.target) && !list.contains(e.target)) {
+                list.hidden = true;
+            }
+        });
+
+        input.addEventListener("focus", function () {
+            if (list.children.length > 0) list.hidden = false;
+        });
+
+        function escHtml(str) {
+            return str.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+        }
+    })();
+    </script>
 </body>
 </html>

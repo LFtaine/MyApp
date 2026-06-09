@@ -7,15 +7,93 @@
 </head>
 <body>
     <h1>Modifier une série</h1>
-    <form name="recherche" action="../php/select_modif.php" method="post">
-        <fieldset>
-            <input name="nom" type="text" placeholder="Quelle série doit être modifiée ?">
-        </fieldset>
-        <fieldset>
-            <button type="submit">Confirmer</button>
-        </fieldset>
-    </form>
+
+    <div class="search-wrapper">
+        <input id="modif-input" type="text" placeholder="Quelle série doit être modifiée ?" autocomplete="off">
+        <ul id="modif-suggestions" class="suggestions-list" hidden></ul>
+    </div>
+
+    <div id="modif-results"></div>
+
     <br>
     <a href="../index.php">Retour à l'accueil</a>
+
+    <script>
+    (function () {
+        const input       = document.getElementById("modif-input");
+        const list        = document.getElementById("modif-suggestions");
+        const resultsDiv  = document.getElementById("modif-results");
+        let debounceTimer = null;
+
+        input.addEventListener("input", function () {
+            clearTimeout(debounceTimer);
+            const q = this.value.trim();
+            if (q.length < 1) {
+                list.hidden = true;
+                list.innerHTML = "";
+                resultsDiv.innerHTML = "";
+                return;
+            }
+            debounceTimer = setTimeout(() => {
+                fetchSuggestions(q);
+                fetchResults(q);
+            }, 200);
+        });
+
+        function fetchSuggestions(q) {
+            fetch("../php/autocomplete.php?mode=search&q=" + encodeURIComponent(q))
+                .then(r => r.json())
+                .then(data => {
+                    list.innerHTML = "";
+                    if (data.length === 0) { list.hidden = true; return; }
+                    data.forEach(item => {
+                        const li = document.createElement("li");
+                        li.className = "suggestion-item";
+                        li.innerHTML = `<span class="sug-nom">${escHtml(item.nom)}</span>
+                                        <span class="sug-meta">${escHtml(item.type)} · ${escHtml(item.avancee)}</span>`;
+                        li.addEventListener("mousedown", function (e) {
+                            e.preventDefault();
+                            input.value = item.nom;
+                            list.hidden = true;
+                            // Aller directement au formulaire de modification
+                            resultsDiv.innerHTML = "";
+                            window.location.href = "../php/modif_form.php?num=" + item.code;
+                        });
+                        list.appendChild(li);
+                    });
+                    list.hidden = false;
+                });
+        }
+
+        function fetchResults(q) {
+            const formData = new FormData();
+            formData.append("nom", q);
+            fetch("../php/select_modif.php", { method: "POST", body: formData })
+                .then(r => r.text())
+                .then(html => {
+                    const parser = new DOMParser();
+                    const doc    = parser.parseFromString(html, "text/html");
+                    const body   = doc.body;
+                    const anchor = body.querySelector("a");
+                    if (anchor) anchor.remove();
+                    resultsDiv.innerHTML = body.innerHTML;
+                });
+        }
+
+        document.addEventListener("click", function (e) {
+            if (!input.contains(e.target) && !list.contains(e.target)) {
+                list.hidden = true;
+            }
+        });
+
+        input.addEventListener("focus", function () {
+            if (list.children.length > 0) list.hidden = false;
+        });
+
+        function escHtml(str) {
+            return str.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+        }
+    })();
+    </script>
 </body>
 </html>

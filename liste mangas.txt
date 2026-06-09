@@ -1,6 +1,4 @@
-
-                   
-             ❎ Lecture commencée ❎
+                ❎ Lecture commencée ❎
                   ✅ Lecture terminée ✅
                   🔵 Animé commencé 🔵
                      ☑️ Animé terminé ☑️
@@ -10,19 +8,25 @@
                         🟨 Light novel 🟨
                🔴 En cours d'acquisition 🔴
                ❌ Possédé en intégralité ❌
+                                
+                                  
+             
 
-
+                  ✨ Total possédé: 487 ✨
+                       🔥 Collectors: 48 🔥
+           💲Valeur totale estimée: 3840€💲
+     
 001) Jojo part 1 : Phantom Blood ✅☑️
 002) Jojo part 2 : Battle Tendency ❎☑️
 003) Jojo part 3:Stardust Crusader❎☑️
-004) Jojo part 4:Diamond is Umbreakable 🔵
+004) Jojo part 4:Diamond is Umbrea...🔵
 005) Jojo part 5 : Golden Wind ❎🔵
 006) Jojo part 6 : Stone Ocean ✅☑️
 007) Jojo part 7 : Steel Ball Run ✅
 008) Jojo part 8 : Jojolion ✅
 009) Jojo part 9: The Jojolands ✅
 010) Jjk 0 ✅❌
-011) Under Execution, Under Jailbreak ✅
+011) Under Execution, Under... ✅
 012) Crazy D. Demonic Hearthbreak ✅
 013) Thus Spoke Kishibe Rohan ✅☑️
 014) Dead Man's Questions ✅
@@ -39,7 +43,7 @@
 025) Bleach ✅☑️
 026) Burn The Witch ✅❌
 027) One piece ✅🔵🔴
-028) One punch man ✅🔵⬜
+028) One punch man ✅🔵
 029) Black buttler ☑️
 030) Tokyo Ghoul ✅☑️🔴
 031) Tokyo Ghoul Re ✅☑️🔴
@@ -86,7 +90,7 @@
 072) Broken Blade ✅
 073) Tomie ✅❌
 074) Mushoku tensei 🔵
-075) L'atelier des sorciers ❎🔵 
+075) L'atelier des sorciers ❎🔵  
 076) Ajin ✅🔵❌
 077) Noragami ✅
 078) Beelzebub ✅🔴
@@ -126,7 +130,7 @@
 112) Tripeace ❎
 113) Overflow 🔵
 114) Gradalis 🟣❎
-115) Conseil d'amour du grand duc des enfers 🟣❎
+115) Conseil d'amour du grand... 🟣❎
 116) La jacynthe violette 🟣❎
 117) The Red king 🟣✅
 118) Cruelle innocence 🟣❎
@@ -140,7 +144,7 @@
 126) Une seconde 🟣❎
 127) Virtual runaways 🟣✅
 128) Doppelganger 🟣❎
-129) Vos commentaires ensoleillent ma journée 🟣❎
+129) Vos commentaires ensoleillent... 🟣❎
 130) L'enfer homophobe 🟣❎
 131) Player 🟣❎
 132) L'expert de la tour tutoriel 🟣❎
@@ -152,7 +156,7 @@
 138) Une famille parfaite 🟣✅
 139) Mon plus grand secret 🟣✅
 140) Killstagram 🟣✅
-141) Hellbound 🟣❎
+141) Hellbound 🟣✅
 142) Mort imminente 🟣✅
 143) Nan yak 🟣✅
 144) Chateau d'ambre 🟣❎
@@ -217,7 +221,7 @@
 203) World trigger ✅
 204) Badass cop & dolphin ❎
 205) Yozakura quartet ❎
-206) Haikyuu! ❎
+206) Haikyuu! ❎🔵  
 207) Sket dance ❎
 208) Nisekoi ❎
 209) Demon tune ✅
@@ -231,7 +235,7 @@
 217) Baki Dou (2018) ✅
 218) Planètes ✅
 219) Adabana ✅
-220) Excuse me dentist, it's touching me ❎
+220) Excuse me dentist, it's... ❎
 221) Fire punch ✅❌
 222) Sayonara football ❎
 223) Valkyrie apocalypse ✅🔵
@@ -246,7 +250,7 @@
 232) Beyblade 🔵
 233) To your eternity ✅
 234) Nirvana ❎
-235) Je suis un assassin et je surpasse le héros❎
+235) Je suis un assassin et je surpasse... ❎
 236) Allégoria ❎
 237) Gantz ✅
 238) Gantz:E ✅
@@ -418,7 +422,7 @@
 406) Study group 🟣✅
 407) Pour ne pas mourir 🟣❎
 408) Solo leveling: Ragnarok 🟣✅
-409) Usogui ✅   
+409) Usogui ✅    
 410) Frieren ✅🔴
 411) Ichi the witch ✅
 412) Gokurakugai ✅
@@ -426,7 +430,7 @@
 414) Laws of the universe ✅
 415) The great war 🟣❎
 416) Seraph of the end ✅  
-417) After God ✅❌ 
+417) After God ✅❌  
 418) Ryota killed his brother ✅
 419) Versus ❎
 420) War of the adults ✅
@@ -447,110 +451,115 @@
 433) Amateur Vigilante ✅
 434) Fighting Girls ✅
 435) 44th period: survival class 🟣✅
-436) Jujutsu Kaisen modulo 3 ✅
+436) Jujutsu Kaisen modulo  ✅
 437) Tower of god : Urek Mazino 🟣✅
-438) Hellsing ✅🔴 
+438) Hellsing ✅🔴  
 439) Crows ❎🔴
 440) In your shadow ✅
 441) Le grand retournement 🟣✅
 442) Time Killers ✅
 443) Paranoïa agent 🔵
 444) Toriko ✅
-445) Juste l'espace entre nous ☑️ 
-446) Bloom 🔵 
-447) GTO 🔵 
+445) Juste l'espace entre nous ☑️  
+446) Bloom 🔵  
+447) GTO 🔵  
 448) KAMI KILL ✅
 449) Centuria ✅❌
 450) Usogui: Tokubetsu-hen ✅
-451) Toilet-bound Hanako-kun ✅🔵 
-452) Gloutons et dragons ☑️ 
-453) Brutal: Satsujin Kansatsukan no kokuhaku ✅
+451) Toilet-bound Hanako-kun ✅🔵  
+452) Gloutons et dragons ☑️  
+453) Brutal: Satsujin Keisatsukan... ✅
 454) Witchriv ✅
-455) Bungo stray dogs ✅ 
-456) Blue Period ✅🔴 
+455) Bungo stray dogs ✅  
+456) Blue Period ✅🔴  
 457) Punk Gun ✅
-458) Phantom Busters ❎ 
+458) Phantom Busters ❎  
 459) Chicken Wings Diaries ✅
-460) Veil ✅ 
+460) Veil ✅  
 461) Gintama ❎
 462) If your dreams didn't come true, die ✅
-463) Persona 4 ✅🔵 
+463) Persona 4 ✅🔵  
 464) Once upon a wicked witch ✅
-465) Les mémoires de Vanitas ✅🔵🔴 
+465) Les mémoires de Vanitas ✅🔵🔴  
 466) Bungo stray dogs beast ✅❌
 467) Bloody Cruise ❎🔴
 468) Doomsday war ✅🔴 
-469) Innocent ✅ 
-470) Boy's abyss ✅🔴 
-471) Innocent rouge ✅ 
+469) Innocent ✅  
+470) Boy's abyss ✅🔴  
+471) Innocent rouge ✅  
 472) Emerging ✅❌
-473) Les noces des lucioles ✅ 
+473) Les noces des lucioles ✅  
 474) Les gouttes de Dieu ❎🔴
-475) Les carnets de l'apothicaire 🔵 
-476) Beauty and the Devil ❎ 
-477) Lady k and the sick man ❎ 
-478) Himizu ✅ 
-479) Moriarty ❎ 
+475) Les carnets de l'apothicaire 🔵  
+476) Beauty and the Devil ❎  
+477) Lady k and the sick man ❎  
+478) Himizu ✅  
+479) Moriarty ❎  
 480) The trembling right hand ✅
-481) Reincarnation Colosseum ❎ 
-482) Détonations ✅❌ 
-483) Diabolik lovers 🔵 
-484) Devil's Line ❎🔵🔴 
-485) Ouran Host club 🔵 
-486) Cosmic Princess Kaguya ☑️ 
-487) Pandora Hearts ✅🔴 
-488) Angel Beats 🔵 
-489) Romantic Killer ☑️ 
-490) Perfect Crime ❎ 
-491) Aggretsuko ☑️ 
+481) Reincarnation Colosseum ❎  
+482) Détonations ✅❌  
+483) Diabolik lovers 🔵  
+484) Devil's Line ❎🔵🔴  
+485) Ouran Host club 🔵  
+486) Cosmic Princess Kaguya ☑️  
+487) Pandora Hearts ✅🔴  
+488) Angel Beats 🔵  
+489) Romantic Killer ☑️  
+490) Perfect Crime ❎  
+491) Aggretsuko ☑️  
 492) Lili-men ❎
 493) Tip Tap Slap ✅
-494) Je veux manger ton pancréas ☑️ 
-495) Girls last tour 🔵 
-496) Komi can't communicate 🔵 
-497) Criminelles fiançailles 🔵 
-498) The dangers in my heart 🔵 
-499) Shiboyugi 🔵 
-500) The Eminence in Shadow 🔵 🇩🇪
-501) Vampire hunter D 🔵 
-502) Great Pretender ☑️ 
-503) Sous les yeux du génie ❎🟣
-504) Bocchi the rock ! 🔵 
-505) Persona 3 ❎🔵 
-506) Saiki Kusuo no psy nan ☑️ 
-507) Beastars 🔵 
-508) Form the red fog ✅ 
+494) Je veux manger ton pancréas ☑️  
+495) Girls last tour 🔵  
+496) Komi can't communicate 🔵  
+497) Criminelles fiançailles 🔵  
+498) The dangers in my heart 🔵  
+499) Shiboyugi 🔵  
+500) The Eminence in Shadow 🔵  🇩🇪
+501) Vampire hunter D 🔵  
+502) Great Pretender ☑️  
+503) Sous les yeux du génie 🟣❎
+504) Bocchi the rock ! 🔵  
+505) Persona 3 ❎🔵  
+506) Saiki Kusuo no psy nan ☑️  
+507) Beastars 🔵  
+508) Form the red fog ✅  
 509) Gannibal ✅🔴
-510) La ferme de monsieur A ❎ 
-511) Servamp 🔵 
-512) Yami hero ❎ 
-513) On l'a fait ✅ 
-514) Le grand magasin ☑️ 
-515) Le garçon d'à côté 🔵 
-516) Needy girl overdose 🔵 
-517) Nanbaka 🔵 
-517) Vermeil in gold 🔵 
-518) The Magical Girl and the Evil Lieutenant Used to Be Archenemies ☑️ 
-519) Kawaii dake shikimori-san 🔵 
-520) The 100 Girlfriends Who Really Really Love you 🔵 
-521) Sankarea 🔵 
-522) Vampire dormitory 🔵 
-523) Akudama drive ☑️ 
-524) Skip and loafer 🔵 
+510) La ferme de monsieur A ❎  
+511) Servamp 🔵  
+512) Yami hero ❎  
+513) On l'a fait ✅  
+514) Le grand magasin ☑️  
+515) Le garçon d'à côté 🔵  
+516) Needy girl overdose 🔵  
+517) Nanbaka 🔵  
+517) Vermeil in gold 🔵  
+518) Katsute mahou shoujo to aku wa... ☑️  
+519) Kawaii dake shikimori-san 🔵  
+520) The 100 Girlfriends Who Really... 🔵  
+521) Sankarea 🔵  
+522) Vampire dormitory 🔵  
+523) Akudama drive ☑️  
+524) Skip and loafer 🔵  
 525) Copycat ✅🟣
-526) Love of kill 🔵 
-527) Amnesia 🔵 
-528) Madoka ☑️   
-529) Le prisme de l'amour ☑️ 
-530) I love you so I kill you ❎ 
+526) Love of kill 🔵  
+527) Amnesia 🔵  
+528) Madoka ☑️    
+529) Le prisme de l'amour ☑️  
+530) I love you so I kill you ❎  
 531) Serial experiment lain 🔵
-532) Les enfants loups ☑️ 
-533) My dress up darling 🔵 
-534) Bubble ☑️  (bleh)
-535) Gnosia ☑️ 
-536) Prison school 🔵 
-537) My happy mariage 🔵 
-538) Castlevania Nocturne 🔵 
-539) Danganronpa ✅ 
-540) L'ère des cristaux 🔵 
-541) Kiznaiver 🔵 
+532) Les enfants loups ☑️  
+533) My dress up darling 🔵  
+534) Bubble ☑️   (bleh)
+535) Gnosia ☑️  
+536) Prison school 🔵  
+537) My happy mariage 🔵  
+538) Castlevania Nocturne 🔵  
+539) Danganronpa ✅  
+540) L'ère des cristaux 🔵  
+541) Kiznaiver ☑️  
+542) Mononoke 🔵  
+543) Undertaker riddle ❎
+544) Hana ne peut pas vivre sans moi ❎  
+545) Nippon Sangoku ❎
+546) All of us are dead 🟣⬜
