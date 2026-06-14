@@ -10,6 +10,7 @@
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="../style/style.css">
+    <link rel="icon" type="image/x-icon" href="../images/icone.ico">
     <title>Détails</title>
 </head>
 <body>
@@ -40,7 +41,7 @@
     }
 
     $media   = ($donnee[0]["STATUT_CODE"] == "MANGA") ? "lire" : "regarder";
-    $avancee = ($donnee[0]["AVANCEE_CODE_AVANCEE"] == "ANIME_TERMINE" || $donnee[0]["AVANCEE_CODE_AVANCEE"] == "LECTURE_TERMINEE") ? "finis de" : "commencé à";
+    $avancee = ($donnee[0]["AVANCEE_CODE_AVANCEE"] == "ANIME_TERMINE" || $donnee[0]["AVANCEE_CODE_AVANCEE"] == "LECTURE_TERMINEE") ? "fini de" : "commencé à";
     $fin      = $donnee[0]["FIN"] ? "cette série est terminée." : "cette série n'est pas terminée.";
     $nom_serie = htmlspecialchars($donnee[0]["SERIE_NOM"]);
     $statut    = htmlspecialchars(strtolower($donnee[0]["STATUT_CODE"]));

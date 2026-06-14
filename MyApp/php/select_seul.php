@@ -9,6 +9,7 @@
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="../style/style.css">
+    <link rel="icon" type="image/x-icon" href="../images/icone.ico">
     <title>Recherche</title>
 </head>
 <body>
@@ -46,7 +47,7 @@
 
         foreach ($donnee as $l) {
             $media   = ($l["STATUT_CODE"] == "MANGA") ? "lire" : "regarder";
-            $avancee = ($l["AVANCEE_CODE_AVANCEE"] == "ANIME_TERMINE" || $l["AVANCEE_CODE_AVANCEE"] == "LECTURE_TERMINEE") ? "finis de" : "commencé à";
+            $avancee = ($l["AVANCEE_CODE_AVANCEE"] == "ANIME_TERMINE" || $l["AVANCEE_CODE_AVANCEE"] == "LECTURE_TERMINEE") ? "fini de" : "commencé à";
             $fin         = $l["FIN"] ? "cette série est terminée." : "cette série n'est pas terminée.";
             $page        = "details.php?num=" . intval($l["SERIE_CODE"]);
             $nom_affiche = htmlspecialchars($l["SERIE_NOM"]);

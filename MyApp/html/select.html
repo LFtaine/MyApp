@@ -2,19 +2,100 @@
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="../style/style.css">
+    <link rel="icon" type="image/x-icon" href="../images/icone.ico">
     <title>Recherche</title>
 </head>
 <body>
     <h1>Rechercher une série</h1>
-    <form name="recherche" action="../php/select_seul.php" method="post">
-        <fieldset>
-            <input name="nom" type="text" placeholder="Nom de la série à rechercher">
-        </fieldset>
-        <fieldset>
-            <button type="submit">Confirmer</button>
-        </fieldset>
-    </form>
+
+    <div class="search-wrapper">
+        <input id="search-input" type="text" placeholder="Nom de la série à rechercher" autocomplete="off">
+        <ul id="search-suggestions" class="suggestions-list" hidden></ul>
+    </div>
+
+    <div id="search-results"></div>
+
     <br>
     <a href="../index.php">Retour à l'accueil</a>
+
+    <script>
+    (function () {
+        const input       = document.getElementById("search-input");
+        const list        = document.getElementById("search-suggestions");
+        const resultsDiv  = document.getElementById("search-results");
+        let debounceTimer = null;
+
+        input.addEventListener("input", function () {
+            clearTimeout(debounceTimer);
+            const q = this.value.trim();
+
+            if (q.length < 1) {
+                list.hidden = true;
+                list.innerHTML = "";
+                resultsDiv.innerHTML = "";
+                return;
+            }
+
+            debounceTimer = setTimeout(() => {
+                fetchSuggestions(q);
+                fetchResults(q);
+            }, 200);
+        });
+
+        function fetchSuggestions(q) {
+            fetch("../php/autocomplete.php?mode=search&q=" + encodeURIComponent(q))
+                .then(r => r.json())
+                .then(data => {
+                    list.innerHTML = "";
+                    if (data.length === 0) { list.hidden = true; return; }
+                    data.forEach(item => {
+                        const li = document.createElement("li");
+                        li.className = "suggestion-item";
+                        li.innerHTML = `<span class="sug-nom">${escHtml(item.nom)}</span>
+                                        <span class="sug-meta">${escHtml(item.type)} · ${escHtml(item.avancee)}</span>`;
+                        li.addEventListener("mousedown", function (e) {
+                            e.preventDefault();
+                            input.value = item.nom;
+                            list.hidden = true;
+                            fetchResults(item.nom);
+                        });
+                        list.appendChild(li);
+                    });
+                    list.hidden = false;
+                });
+        }
+
+        function fetchResults(q) {
+            const formData = new FormData();
+            formData.append("nom", q);
+            fetch("../php/select_seul.php", { method: "POST", body: formData })
+                .then(r => r.text())
+                .then(html => {
+                    const parser = new DOMParser();
+                    const doc    = parser.parseFromString(html, "text/html");
+                    // Extraire tout ce qui est dans le body sauf le premier lien (retour)
+                    const body   = doc.body;
+                    const anchor = body.querySelector("a");
+                    if (anchor) anchor.remove();
+                    resultsDiv.innerHTML = body.innerHTML;
+                });
+        }
+
+        // Fermer la liste si on clique ailleurs
+        document.addEventListener("click", function (e) {
+            if (!input.contains(e.target) && !list.contains(e.target)) {
+                list.hidden = true;
+            }
+        });
+
+        input.addEventListener("focus", function () {
+            if (list.children.length > 0) list.hidden = false;
+        });
+
+        function escHtml(str) {
+            return str.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+        }
+    })();
+    </script>
 </body>
 </html>
